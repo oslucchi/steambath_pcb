@@ -1,0 +1,549 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title: EAGLE Drawing /archive/Dev/eclipse/bathHandler/pcb/usb-rasp-tchscr.brd
+%%Creator: EAGLE
+%%Pages: 1
+%%BoundingBox: 0 0 576 810
+%%EndComments
+
+% Coordinate transfer:
+
+/EU { 254 div 0.072 mul } def
+/inch { 72 mul } def
+
+% Linestyle:
+
+1 setlinecap
+1 setlinejoin
+
+% Drawing functions:
+
+/l {  % draw a line
+   /lw exch def
+   /y2 exch def
+   /x2 exch def
+   /y1 exch def
+   /x1 exch def
+   newpath
+   x1 EU y1 EU moveto
+   x2 EU y2 EU lineto
+   lw EU setlinewidth
+   stroke
+   } def
+
+/h {  % draw a hole
+   /d  exch def
+   /y  exch def
+   /x  exch def
+   d 0 gt {
+     newpath
+     x EU y EU d 2 div EU 0 360 arc
+     currentgray dup
+     1 exch sub setgray
+     fill
+     setgray
+     } if
+   } def
+
+/b {  % draw a bar
+   /an exch def
+   /y2 exch def
+   /x2 exch def
+   /y1 exch def
+   /x1 exch def
+   /w2 x2 x1 sub 2 div EU def
+   /h2 y2 y1 sub 2 div EU def
+   gsave
+   x1 x2 add 2 div EU y1 y2 add 2 div EU translate
+   an rotate
+   newpath
+   w2     h2     moveto
+   w2 neg h2     lineto
+   w2 neg h2 neg lineto
+   w2     h2 neg lineto
+   closepath
+   fill
+   grestore
+   } def
+
+/c {  % draw a circle
+   /lw exch def
+   /rd exch def
+   /y  exch def
+   /x  exch def
+   newpath
+   lw EU setlinewidth
+   x EU y EU rd EU 0 360 arc
+   stroke
+   } def
+
+/a {  % draw an arc
+   /lc exch def
+   /ae exch def
+   /as exch def
+   /lw exch def
+   /rd exch def
+   /y  exch def
+   /x  exch def
+   lw rd 2 mul gt {
+     /rd rd lw 2 div add 2 div def
+     /lw rd 2 mul def
+     } if
+   currentlinecap currentlinejoin
+   lc setlinecap 0 setlinejoin
+   newpath
+   lw EU setlinewidth
+   x EU y EU rd EU as ae arc
+   stroke
+   setlinejoin setlinecap
+   } def
+
+/p {  % draw a pie
+   /d exch def
+   /y exch def
+   /x exch def
+   newpath
+   x EU y EU d 2 div EU 0 360 arc
+   fill
+   } def
+
+/edge { 0.20710678119 mul } def
+
+/o {  % draw an octagon
+   /an exch def
+   /dy exch def
+   /dx exch def
+   /y  exch def
+   /x  exch def
+   gsave
+   x EU y EU translate
+   an dx dy lt { 90 add /dx dy /dy dx def def } if rotate
+   newpath
+      0 dx 2 div sub EU                    0 dy edge  add EU moveto
+      0 dx dy sub 2 div sub dy edge sub EU 0 dy 2 div add EU lineto
+      0 dx dy sub 2 div add dy edge add EU 0 dy 2 div add EU lineto
+      0 dx 2 div add EU                    0 dy edge  add EU lineto
+      0 dx 2 div add EU                    0 dy edge  sub EU lineto
+      0 dx dy sub 2 div add dy edge add EU 0 dy 2 div sub EU lineto
+      0 dx dy sub 2 div sub dy edge sub EU 0 dy 2 div sub EU lineto
+      0 dx 2 div sub EU                    0 dy edge  sub EU lineto
+   closepath
+   fill
+   grestore
+   } def
+
+% the real drawing size:
+
+/MinDrawX -618067 EU def
+/MinDrawY  61383 EU def
+/MaxDrawX -265684 EU def
+/MaxDrawY 673227 EU def
+
+% the usable page size:
+
+/LeftMargin 0.25 inch def  % change these if drawing gets clipped!
+/BotMargin  0.25 inch def
+/PageWidth   7.7500 inch def
+/PageHeight 11.0000 inch def
+
+% are we going to rotate?:
+
+/RotateDrawing 0 0 ne def
+
+% Media size functions:
+
+/AbortMessage {  % Show a message in a box and stop printing
+   /h 100 def
+   /Courier findfont 12 scalefont setfont
+   mediawidth pagemargin sub h 1 setpage
+   newpath
+   0 0 moveto
+   0 h rlineto
+   mediawidth pagemargin sub 0 rlineto
+   0 h neg rlineto
+   closepath
+   5 setlinewidth
+   stroke
+   newpath 50 60 moveto (ERROR: Jobsize exceeds physical printing area!) show
+   newpath 50 40 moveto (       Job has been aborted!) show
+   showpage
+   stop
+   } def
+
+/SelectPage {  % Select the page identified by Row and Column
+   /Column exch def
+   /Row    exch def
+
+   % the actually exposed area (if the machine knows these parameters!):
+
+   /DrawX MaxDrawX MinDrawX sub def
+   /DrawY MaxDrawY MinDrawY sub def
+   statusdict /setpage known
+   statusdict /mediawidth known and
+   statusdict /medialength known and
+   statusdict /pagemargin known and {
+      % this is for machines that can tell the media size:
+      statusdict begin
+         /MediaW mediawidth pagemargin sub def
+         DrawX DrawY ge {
+            DrawX MediaW le DrawY medialength le and {
+               MediaW DrawY 1 setpage
+               MediaW DrawX sub 2 div 0 translate
+               }{
+            DrawY MediaW le DrawX medialength le and {
+               MediaW DrawX 0 setpage
+               0 MediaW DrawY sub 2 div translate
+               }{
+               AbortMessage
+               } ifelse
+               } ifelse
+            }{
+            DrawY MediaW le DrawX medialength le and {
+               MediaW DrawX 0 setpage
+               0 MediaW DrawY sub 2 div translate
+               }{
+            DrawX MediaW le DrawY medialength le and {
+               MediaW DrawY 1 setpage
+               MediaW DrawX sub 2 div 0 translate
+               }{
+               AbortMessage
+               } ifelse
+               } ifelse
+            } ifelse
+         end
+      }{
+      % this is for machines that can NOT tell the media size:
+      % (Ghostscript doesn't like this!)
+      /Product product length string def
+      /i 0 def
+      product { dup 97 lt { 32 add } if Product exch i exch put /i i 1 add def } forall 
+      Product (ghostscript) search dup /IsGhostscript exch def
+      { pop pop } if
+      pop
+      IsGhostscript not {
+         statusdict /setpage known {
+            statusdict begin
+               RotateDrawing {
+                  LeftMargin PageHeight add BotMargin DrawY add
+                  }{
+                  BotMargin DrawY add LeftMargin DrawX add 
+                  } ifelse
+               0 setpage
+               end
+            } if
+         } if
+      % set clipping boundary:
+      newpath
+      LeftMargin BotMargin moveto
+      0 PageHeight rlineto
+      PageWidth  0 rlineto
+      0 PageHeight neg rlineto
+      closepath
+      clip
+      % set the origin:
+      LeftMargin BotMargin translate
+      RotateDrawing {
+         0 PageHeight translate
+         -90 rotate
+         PageHeight Column mul neg PageWidth Row mul neg translate
+         }{
+         PageWidth Column mul neg PageHeight Row mul neg translate
+         } ifelse
+      } ifelse
+   % move the lower left corner of the drawing to the origin:
+   MinDrawX neg MinDrawY neg translate
+   
+   % Linestyle:
+   
+   1 setlinecap
+   1 setlinejoin
+   
+   % invert drawing:
+   newpath
+   MinDrawX MinDrawY moveto
+   MaxDrawX MinDrawY lineto
+   MaxDrawX MaxDrawY lineto
+   MinDrawX MaxDrawY lineto
+   0 setgray
+   closepath fill
+   1 setgray
+   
+   } def
+
+% TheDrawing
+
+gsave 0 0 SelectPage
+-497840 533400 -518160 533400 254 l
+-518160 533400 -508000 543560 254 l
+-508000 543560 -508000 523240 254 l
+-508000 523240 -497840 533400 254 l
+-497840 660400 -518160 660400 254 l
+-518160 660400 -508000 670560 254 l
+-508000 670560 -508000 650240 254 l
+-508000 650240 -497840 660400 254 l
+-497840 304800 -518160 304800 254 l
+-518160 304800 -508000 314960 254 l
+-508000 314960 -508000 294640 254 l
+-508000 294640 -497840 304800 254 l
+-497840 431800 -518160 431800 254 l
+-518160 431800 -508000 441960 254 l
+-508000 441960 -508000 421640 254 l
+-508000 421640 -497840 431800 254 l
+-497840 76200 -518160 76200 254 l
+-518160 76200 -508000 86360 254 l
+-508000 86360 -508000 66040 254 l
+-508000 66040 -497840 76200 254 l
+-497840 203200 -518160 203200 254 l
+-518160 203200 -508000 213360 254 l
+-508000 213360 -508000 193040 254 l
+-508000 193040 -497840 203200 254 l
+-595280 545009 -592568 542297 1524 l
+-592568 542297 -592568 536874 1524 l
+-592568 536874 -595280 534162 1524 l
+-595280 534162 -597991 534162 1524 l
+-597991 534162 -600703 536874 1524 l
+-600703 536874 -600703 542297 1524 l
+-600703 542297 -603415 545009 1524 l
+-603415 545009 -606126 545009 1524 l
+-606126 545009 -608838 542297 1524 l
+-608838 542297 -608838 536874 1524 l
+-608838 536874 -606126 534162 1524 l
+-595280 561380 -592568 558669 1524 l
+-592568 558669 -592568 553245 1524 l
+-592568 553245 -595280 550534 1524 l
+-595280 550534 -606126 550534 1524 l
+-606126 550534 -608838 553245 1524 l
+-608838 553245 -608838 558669 1524 l
+-608838 558669 -606126 561380 1524 l
+-608838 566905 -592568 566905 1524 l
+-592568 566905 -592568 575040 1524 l
+-592568 575040 -595280 577752 1524 l
+-595280 577752 -600703 577752 1524 l
+-600703 577752 -603415 575040 1524 l
+-603415 575040 -603415 566905 1524 l
+-603415 572328 -608838 577752 1524 l
+-600703 583277 -600703 594123 1524 l
+-592568 607783 -592568 602360 1524 l
+-592568 602360 -595280 599648 1524 l
+-595280 599648 -606126 599648 1524 l
+-606126 599648 -608838 602360 1524 l
+-608838 602360 -608838 607783 1524 l
+-608838 607783 -606126 610495 1524 l
+-606126 610495 -595280 610495 1524 l
+-595280 610495 -592568 607783 1524 l
+-592568 616020 -606126 616020 1524 l
+-606126 616020 -608838 618731 1524 l
+-608838 618731 -608838 624155 1524 l
+-608838 624155 -606126 626866 1524 l
+-606126 626866 -592568 626866 1524 l
+-608838 637815 -592568 637815 1524 l
+-592568 632391 -592568 643238 1524 l
+-608838 336385 -592568 336385 1524 l
+-592568 330962 -592568 341809 1524 l
+-595280 358180 -592568 355469 1524 l
+-592568 355469 -592568 350045 1524 l
+-592568 350045 -595280 347334 1524 l
+-595280 347334 -606126 347334 1524 l
+-606126 347334 -608838 350045 1524 l
+-608838 350045 -608838 355469 1524 l
+-608838 355469 -606126 358180 1524 l
+-608838 363705 -592568 363705 1524 l
+-600703 363705 -600703 374552 1524 l
+-592568 374552 -608838 374552 1524 l
+-600703 380077 -600703 390923 1524 l
+-608838 396448 -608838 401872 1524 l
+-608838 399160 -592568 399160 1524 l
+-592568 396448 -592568 401872 1524 l
+-608838 407363 -592568 407363 1524 l
+-592568 407363 -608838 418209 1524 l
+-608838 418209 -592568 418209 1524 l
+-608838 76962 -592568 76962 1524 l
+-592568 76962 -592568 85097 1524 l
+-592568 85097 -595280 87809 1524 l
+-595280 87809 -600703 87809 1524 l
+-600703 87809 -603415 85097 1524 l
+-603415 85097 -603415 76962 1524 l
+-592568 93334 -608838 93334 1524 l
+-608838 93334 -603415 98757 1524 l
+-603415 98757 -608838 104180 1524 l
+-608838 104180 -592568 104180 1524 l
+-608838 109705 -592568 109705 1524 l
+-592568 109705 -592568 117840 1524 l
+-592568 117840 -595280 120552 1524 l
+-595280 120552 -600703 120552 1524 l
+-600703 120552 -603415 117840 1524 l
+-603415 117840 -603415 109705 1524 l
+-603415 115128 -608838 120552 1524 l
+-600703 126077 -600703 136923 1524 l
+-592568 150583 -592568 145160 1524 l
+-592568 145160 -595280 142448 1524 l
+-595280 142448 -606126 142448 1524 l
+-606126 142448 -608838 145160 1524 l
+-608838 145160 -608838 150583 1524 l
+-608838 150583 -606126 153295 1524 l
+-606126 153295 -595280 153295 1524 l
+-595280 153295 -592568 150583 1524 l
+-592568 158820 -606126 158820 1524 l
+-606126 158820 -608838 161531 1524 l
+-608838 161531 -608838 166955 1524 l
+-608838 166955 -606126 169666 1524 l
+-606126 169666 -592568 169666 1524 l
+-608838 180615 -592568 180615 1524 l
+-592568 175191 -592568 186038 1524 l
+-343662 618497 -354509 618497 1524 l
+-349085 623920 -349085 613074 1524 l
+-343662 154947 -354509 154947 1524 l
+-349085 160370 -349085 149524 1524 l
+-346703 96012 -346703 106859 1524 l
+-346703 553212 -346703 564059 1524 l
+-502741 629412 -497318 634835 1524 l
+-497318 634835 -513588 634835 1524 l
+-513588 629412 -513588 640259 1524 l
+-502741 400812 -497318 406235 1524 l
+-497318 406235 -513588 406235 1524 l
+-513588 400812 -513588 411659 1524 l
+-502741 172212 -497318 177635 1524 l
+-497318 177635 -513588 177635 1524 l
+-513588 172212 -513588 183059 1524 l
+-488188 78747 -471918 78747 1524 l
+-471918 78747 -480053 70612 1524 l
+-480053 70612 -480053 81459 1524 l
+-513588 326397 -497318 326397 1524 l
+-497318 326397 -505453 318262 1524 l
+-505453 318262 -505453 329109 1524 l
+-513588 561347 -497318 561347 1524 l
+-497318 561347 -505453 553212 1524 l
+-505453 553212 -505453 564059 1524 l
+-482600 406400 20320 p
+-472440 406400 -492760 406400 254 l
+-492760 406400 -482600 416560 254 l
+-482600 416560 -482600 396240 254 l
+-482600 396240 -472440 406400 254 l
+-482600 584200 20320 p
+-472440 584200 -492760 584200 254 l
+-492760 584200 -482600 594360 254 l
+-482600 594360 -482600 574040 254 l
+-482600 574040 -472440 584200 254 l
+-482600 584200 -533400 584200 6350 l
+-533400 584200 -546100 571500 6350 l
+-546100 571500 -546100 488950 6350 l
+-546100 488950 -533400 476250 6350 l
+-533400 476250 -476250 476250 6350 l
+-482600 355600 20320 p
+-472440 355600 -492760 355600 254 l
+-492760 355600 -482600 365760 254 l
+-482600 365760 -482600 345440 254 l
+-482600 345440 -472440 355600 254 l
+-457200 457200 -457200 368300 6350 l
+-469900 355600 -482600 355600 6350 l
+-469900 355600 -457200 368300 6350 l
+-476250 476250 -457200 457200 6350 l
+-482600 381000 20320 p
+-472440 381000 -492760 381000 254 l
+-492760 381000 -482600 391160 254 l
+-482600 391160 -482600 370840 254 l
+-482600 370840 -472440 381000 254 l
+-482600 381000 -539750 381000 6350 l
+-539750 381000 -565150 406400 6350 l
+-482600 609600 20320 p
+-472440 609600 -492760 609600 254 l
+-492760 609600 -482600 619760 254 l
+-482600 619760 -482600 599440 254 l
+-482600 599440 -472440 609600 254 l
+-482600 609600 -546100 609600 6350 l
+-546100 609600 -565150 590550 6350 l
+-565150 406400 -565150 590550 6350 l
+-482600 330200 20320 p
+-472440 330200 -492760 330200 254 l
+-492760 330200 -482600 340360 254 l
+-482600 340360 -482600 320040 254 l
+-482600 320040 -472440 330200 254 l
+-482600 127000 20320 p
+-472440 127000 -492760 127000 254 l
+-492760 127000 -482600 137160 254 l
+-482600 137160 -482600 116840 254 l
+-482600 116840 -472440 127000 254 l
+-482600 152400 20320 p
+-472440 152400 -492760 152400 254 l
+-492760 152400 -482600 162560 254 l
+-482600 162560 -482600 142240 254 l
+-482600 142240 -472440 152400 254 l
+-330200 635000 25400 p
+-330200 635000 9906 254 c
+-320040 624840 -340360 645160 254 l
+-482600 635000 20320 p
+-472440 635000 -492760 635000 254 l
+-492760 635000 -482600 645160 254 l
+-482600 645160 -482600 624840 254 l
+-482600 624840 -472440 635000 254 l
+-330200 635000 -482600 635000 20320 l
+-330200 635000 -279400 584200 20320 l
+-279400 381000 20320 p
+-269240 381000 -289560 381000 254 l
+-289560 381000 -279400 370840 254 l
+-279400 370840 -279400 391160 254 l
+-279400 391160 -269240 381000 254 l
+-279400 584200 -279400 381000 20320 l
+-330200 584200 25400 p
+-330200 584200 9906 254 c
+-320040 574040 -340360 594360 254 l
+-330200 584200 -406400 584200 20320 l
+-406400 584200 -431800 558800 20320 l
+-482600 558800 20320 p
+-472440 558800 -492760 558800 254 l
+-492760 558800 -482600 568960 254 l
+-482600 568960 -482600 548640 254 l
+-482600 548640 -472440 558800 254 l
+-431800 558800 -482600 558800 20320 l
+-330200 584200 -330200 279400 20320 l
+-355600 254000 -330200 279400 20320 l
+-355600 254000 -533400 254000 20320 l
+-533400 254000 -558800 228600 20320 l
+-558800 228600 -558800 127000 20320 l
+-558800 127000 -533400 101600 20320 l
+-330200 127000 25400 p
+-330200 127000 9906 254 c
+-320040 116840 -340360 137160 254 l
+-330200 127000 -406400 127000 20320 l
+-406400 127000 -431800 101600 20320 l
+-482600 101600 20320 p
+-472440 101600 -492760 101600 254 l
+-492760 101600 -482600 111760 254 l
+-482600 111760 -482600 91440 254 l
+-482600 91440 -472440 101600 254 l
+-431800 101600 -482600 101600 20320 l
+-533400 101600 -482600 101600 20320 l
+-279400 355600 20320 p
+-269240 355600 -289560 355600 254 l
+-289560 355600 -279400 345440 254 l
+-279400 345440 -279400 365760 254 l
+-279400 365760 -269240 355600 254 l
+-279400 355600 -279400 228600 20320 l
+-279400 228600 -330200 177800 20320 l
+-330200 177800 25400 p
+-330200 177800 9906 254 c
+-320040 167640 -340360 187960 254 l
+-482600 177800 20320 p
+-472440 177800 -492760 177800 254 l
+-492760 177800 -482600 187960 254 l
+-482600 187960 -482600 167640 254 l
+-482600 167640 -472440 177800 254 l
+-330200 177800 -482600 177800 20320 l
+-482600 406400 11000 h
+-482600 584200 11000 h
+-482600 355600 11000 h
+-482600 381000 11000 h
+-482600 609600 11000 h
+-482600 330200 11000 h
+-482600 127000 11000 h
+-482600 152400 11000 h
+-330200 635000 15240 h
+-482600 635000 11000 h
+-279400 381000 12000 h
+-330200 584200 15240 h
+-482600 558800 11000 h
+-330200 127000 15240 h
+-482600 101600 11000 h
+-279400 355600 12000 h
+-330200 177800 15240 h
+-482600 177800 11000 h
+showpage grestore
