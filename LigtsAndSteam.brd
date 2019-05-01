@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.3.0">
+<eagle version="9.2.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
+<setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="12.5" unitdist="mil" unit="mil" style="dots" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
@@ -93,6 +94,10 @@
 <rectangle x1="87.9475" y1="101.6" x2="88.9" y2="109.22" layer="1"/>
 <rectangle x1="-9.525" y1="106.68" x2="-6.985" y2="109.22" layer="1"/>
 <hole x="-3.175" y="-12.065" drill="5.08"/>
+<rectangle x1="88.265" y1="-18.415" x2="88.5825" y2="24.765" layer="1"/>
+<rectangle x1="88.5825" y1="-18.415" x2="88.9" y2="24.765" layer="1"/>
+<dimension x1="89.2175" y1="109.22" x2="89.2175" y2="-18.415" x3="97.155" y3="45.4025" textsize="1.778" layer="1"/>
+<dimension x1="-9.525" y1="-18.415" x2="88.9" y2="-18.7325" x3="39.657834375" y3="-27.7698875" textsize="1.778" layer="1"/>
 </plain>
 <libraries>
 </libraries>
@@ -180,10 +185,14 @@ design rules under a new name.</description>
 <param name="slThermalsForVias" value="0"/>
 <param name="dpMaxLengthDifference" value="10mm"/>
 <param name="dpGapFactor" value="2.5"/>
-<param name="checkGrid" value="0"/>
 <param name="checkAngle" value="0"/>
 <param name="checkFont" value="1"/>
 <param name="checkRestrict" value="1"/>
+<param name="checkStop" value="0"/>
+<param name="checkValues" value="0"/>
+<param name="checkNames" value="1"/>
+<param name="checkWireStubs" value="1"/>
+<param name="checkPolygonWidth" value="0"/>
 <param name="useDiameter" value="13"/>
 <param name="maxErrors" value="50"/>
 </designrules>
@@ -1085,6 +1094,13 @@ design rules under a new name.</description>
 <via x="91.44" y="-17.78" extent="1-16" drill="0.8" diameter="1.905"/>
 </signal>
 </signals>
+<mfgpreviewcolors>
+<mfgpreviewcolor name="soldermaskcolor" color="0xC8008000"/>
+<mfgpreviewcolor name="silkscreencolor" color="0xFFFEFEFE"/>
+<mfgpreviewcolor name="backgroundcolor" color="0xFF282828"/>
+<mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>
+<mfgpreviewcolor name="substratecolor" color="0xFF786E46"/>
+</mfgpreviewcolors>
 </board>
 </drawing>
 <compatibility>
